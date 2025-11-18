@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Google Ads Integration" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <lightning-button label="Connect to Google Ads" onclick={connectToGoogleAds}></lightning-button>
+            <template if:true={isConnected}>
+                <lightning-button label="Fetch Google Ads Data" onclick={fetchGoogleAdsData}></lightning-button>
+                <template if:true={adsData}>
+                    <lightning-datatable
+                        key-field="id"
+                        data={adsData}
+                        columns={columns}
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </template>
+            </template>
+            <template if:true={error}>
+                <div class="slds-text-color_error">{error}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

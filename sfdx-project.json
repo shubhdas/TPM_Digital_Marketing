@@ -1,0 +1,15 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "namespace": "",
+  "sourceApiVersion": "57.0",
+  "plugins": {
+    "sfdx-cli": {
+      "version": "7.186.0"
+    }
+  }
+}

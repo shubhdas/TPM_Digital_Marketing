@@ -1,0 +1,7 @@
+<apex:page showHeader="true" sidebar="true" docType="html-5.0">
+    <h1>Digital Marketing App</h1>
+    <apex:outputPanel>
+        This Visualforce page is a placeholder because a FlexiPage (Lightning App Page) was incorrectly placed under pages/.
+        Move the Lightning App Page XML to force-app/main/default/flexipages if you intend to use it as a FlexiPage.
+    </apex:outputPanel>
+</apex:page>

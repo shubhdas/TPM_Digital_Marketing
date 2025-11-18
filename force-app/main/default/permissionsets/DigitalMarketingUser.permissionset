@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Digital Marketing User</label>
+    <description>Limited access for end users of Digital Marketing application</description>
+    
+    <!-- Object Permissions -->
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Lead</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Client__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Campaign__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Project__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Billing__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    
+    <!-- Field Permissions -->
+    <fieldPermissions>
+        <field>Lead.Company__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Lead.Email__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Lead.FirstName__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Lead.LastName__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Lead.Phone__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Lead.Status__c</field>
+        <readable>true</readable>
+        <writable>true</writable>
+    </fieldPermissions>
+    
+    <!-- Apex Class Permissions -->
+    <classAccess>
+        <apexClass>DigitalMarketingController</apexClass>
+        <enabled>true</enabled>
+    </classAccess>
+    
+    <!-- Lightning Component Permissions -->
+    <applicationVisibilities>
+        <application>DigitalMarketingApp</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    
+    <!-- LWC Component Permissions -->
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>adminDashboard</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>appWorkspace</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>billingManager</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>campaignsManager</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>clientsManager</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>googleAdsIntegration</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>leadsManager</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    <lightningComponentBundleAccesses>
+        <lightningComponentBundle>projectsManager</lightningComponentBundle>
+        <enabled>true</enabled>
+    </lightningComponentBundleAccesses>
+    
+    <!-- User Permissions -->
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApiEnabled</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewSetup</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewAllData</name>
+    </userPermissions>
+</PermissionSet>

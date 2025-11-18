@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Billing Manager" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <lightning-button label="Add Billing" onclick={handleAddBilling}></lightning-button>
+            <lightning-button label="View Billing" onclick={handleViewBilling}></lightning-button>
+        </div>
+        <template if:true={billingRecords}>
+            <lightning-datatable
+                key-field="id"
+                data={billingRecords}
+                columns={columns}
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

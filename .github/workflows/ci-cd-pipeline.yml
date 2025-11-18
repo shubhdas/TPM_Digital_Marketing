@@ -1,0 +1,51 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        
+    - name: Install Salesforce CLI
+      run: |
+        curl https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.gz | tar xz
+        ./sfdx/install
+        echo "$HOME/sfdx/bin" >> $GITHUB_PATH
+        
+    - name: Authenticate Dev Hub
+      run: |
+        echo ${{ secrets.SFDX_AUTH_URL }} | base64 -d > auth.json
+        sfdx force:auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile auth.json --username ${{ secrets.DEV_HUB_USERNAME }} --setdefaultdevhubusername
+      env:
+        SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
+        
+    - name: Deploy to Scratch Org
+      run: |
+        sfdx force:org:create -f config/dev-scratch-def.json -a test-org -d 1
+        sfdx force:source:deploy -p force-app -u test-org
+        
+    - name: Run Tests
+      run: |
+        sfdx force:apex:test:run -u test-org --wait 5
+        
+    - name: Deploy to Dev
+      if: github.ref == 'refs/heads/develop'
+      run: |
+        sfdx force:source:deploy -p force-app -u dev-org
+        
+    - name: Deploy to Prod
+      if: github.ref == 'refs/heads/main'
+      run: |
+        sfdx force:source:deploy -p force-app -u prod-org

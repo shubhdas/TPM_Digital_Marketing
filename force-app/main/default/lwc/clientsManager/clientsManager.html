@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Clients Manager" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <lightning-button label="New Client" onclick={handleNewClient} class="slds-m-bottom_small"></lightning-button>
+            <template if:true={clients}>
+                <lightning-datatable
+                    key-field="id"
+                    data={clients}
+                    columns={columns}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            <template if:true={error}>
+                <div class="slds-text-color_error">{error}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
