@@ -15,6 +15,9 @@ export default class ClientsManager extends LightningElement {
     columns = [
         { label: 'Name', fieldName: 'Name', type: 'text' },
         { label: 'Email', fieldName: 'Client_Email__c', type: 'email' },
+        { label: 'Phone', fieldName: 'Client_Phone__c', type: 'phone' },
+        { label: 'Address', fieldName: 'Client_Address__c', type: 'text' },
+        { label: 'Status', fieldName: 'Client_Status__c', type: 'text' },
         { type: 'action', typeAttributes: { rowActions: [
             { label: 'Edit', name: 'edit' },
             { label: 'Delete', name: 'delete' }
@@ -45,7 +48,7 @@ export default class ClientsManager extends LightningElement {
             .then(() => {
                 this.clientName = '';
                 this.clientEmail = '';
-                return refreshApex(this.clients);
+                return refreshApex(this.wiredClients);
             })
             .catch(error => {
                 this.error = error;
@@ -58,7 +61,7 @@ export default class ClientsManager extends LightningElement {
                 this.clientName = '';
                 this.clientEmail = '';
                 this.clientId = null;
-                return refreshApex(this.clients);
+                return refreshApex(this.wiredClients);
             })
             .catch(error => {
                 this.error = error;

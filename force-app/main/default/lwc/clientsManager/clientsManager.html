@@ -10,6 +10,8 @@
                 </div>
             </div>
             <lightning-button label="Create Client" onclick={handleCreateClient} class="slds-m-top_small"></lightning-button>
+            <lightning-button label="Update Client" onclick={handleUpdateClient} class="slds-m-top_small slds-m-left_x-small" disabled={clientId === null}></lightning-button>
+            <lightning-button label="Cancel" onclick={handleNewClient} class="slds-m-top_small slds-m-left_x-small" disabled={clientId === null}></lightning-button>
             
             <template if:true={clients}>
                 <lightning-datatable
@@ -25,4 +27,3 @@
             </template>
         </div>
     </lightning-card>
-</template>
