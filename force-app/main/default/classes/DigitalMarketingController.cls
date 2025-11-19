@@ -329,7 +329,7 @@ public with sharing class DigitalMarketingController {
             }
             
             // Query with user context - include Billing relationship
-            return [SELECT Id, Name, Status__c, Start_Date__c, End_Date__c, Budget__c, Billing__c FROM Campaign__c ORDER BY CreatedDate DESC LIMIT 100];
+            return [SELECT Id, Name, Status__c, Start_Date__c, End_Date__c, Budget__c FROM Campaign__c ORDER BY CreatedDate DESC LIMIT 100];
         } catch (Exception e) {
             System.debug('Error retrieving campaigns: ' + e.getMessage());
             throw new AuraHandledException('Failed to retrieve campaigns data. Please contact your administrator.');
@@ -422,7 +422,7 @@ public with sharing class DigitalMarketingController {
             }
             
             // Query with user context - include Campaign relationship
-            return [SELECT Id, Name, Status__c, Start_Date__c, End_Date__c, Budget__c, Campaign__c FROM Project__c ORDER BY CreatedDate DESC LIMIT 100];
+            return [SELECT Id, Name, Status__c, Start_Date__c, End_Date__c, Budget__c FROM Project__c ORDER BY CreatedDate DESC LIMIT 100];
         } catch (Exception e) {
             System.debug('Error retrieving projects: ' + e.getMessage());
             throw new AuraHandledException('Failed to retrieve projects data. Please contact your administrator.');

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Source__c</fullName>
+    <fullName>Industry__c</fullName>
     <externalId>false</externalId>
-    <label>Source</label>
+    <label>Industry</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>
@@ -10,15 +10,15 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Web</fullName>
+                <fullName>Technology</fullName>
                 <default>false</default>
             </value>
             <value>
-                <fullName>Referral</fullName>
+                <fullName>Finance</fullName>
                 <default>false</default>
             </value>
             <value>
-                <fullName>Advertisement</fullName>
+                <fullName>Healthcare</fullName>
                 <default>false</default>
             </value>
         </valueSetDefinition>

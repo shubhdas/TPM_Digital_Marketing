@@ -13,11 +13,13 @@
     <setupExperience>none</setupExperience>
     <tabs>
         <tab>standard-home</tab>
-        <tab>standard-Lead</tab>
-        <tab>standard-Client__c</tab>
-        <tab>standard-Campaign__c</tab>
-        <tab>standard-Project__c</tab>
-        <tab>standard-Billing__c</tab>
+        <tab>ProjectsHome</tab>
+        <tab>LeadsHome</tab>
+        <tab>ClientsHome</tab>
+        <tab>CampaignsHome</tab>
+        <tab>BillingHome</tab>
     </tabs>
     <uiType>Lightning</uiType>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
 </CustomApplication>

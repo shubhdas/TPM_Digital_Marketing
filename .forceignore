@@ -1,3 +1,91 @@
-**/jsconfig.json
+#==================================================================================================
+# .forceignore
+# 
+# This file tells the Salesforce CLI which files and folders to ignore when pushing or pulling metadata.
+# 
+# For more information, see: https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ignore.htm
+#==================================================================================================
 
-**/.eslintrc.json
+# Test classes and triggers (these are not deployed to production)
+**/test/**
+**/Test/**
+**/*Test.cls
+**/*Test.cls-meta.xml
+**/*Test.trigger
+**/*Test.trigger-meta.xml
+
+# Metadata that should not be deployed
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Node.js specific
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build artifacts
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Temporary files
+*.tmp
+*.temp
+
+# Visual Studio Code specific
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+
+# Local configuration files
+config/local.json
+config/*.local.*
+
+# Coverage reports
+*.cov
+coverage/
+
+# Logs
+logs/
+*.log
+
+# Environment specific files
+.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Scratch org specific files
+*.scratch
+*.json
+
+# Backup files
+*~
+
+# Package files
+package-lock.json
+yarn.lock

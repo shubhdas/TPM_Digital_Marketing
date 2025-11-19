@@ -6,7 +6,11 @@
     </types>
     <types>
         <members>*</members>
-        <name>ApexTrigger</name>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomField</name>
     </types>
     <types>
         <members>*</members>
@@ -14,19 +18,31 @@
     </types>
     <types>
         <members>*</members>
-        <name>CustomObject</name>
-    </types>
-    <types>
-        <members>*</members>
         <name>PermissionSet</name>
     </types>
     <types>
         <members>*</members>
-        <name>ApexPage</name>
+        <name>Page</name>
+    </types>
+    <types>
+        <members>ProjectsHome</members>
+        <members>LeadsHome</members>
+        <members>ClientsHome</members>
+        <members>CampaignsHome</members>
+        <members>BillingHome</members>
+        <name>FlexiPage</name>
     </types>
     <types>
         <members>*</members>
-        <name>CustomApplication</name>
+        <name>Application</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>Trigger</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>StaticResource</name>
     </types>
     <version>57.0</version>
 </Package>

@@ -1,18 +1,24 @@
 <template>
     <lightning-card title="Clients Manager" icon-name="custom:custom63">
         <div class="slds-m-around_medium">
-            <lightning-button label="New Client" onclick={handleNewClient} class="slds-m-bottom_small"></lightning-button>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input label="Client Name" value={clientName} onchange={handleClientNameChange}></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input label="Client Email" value={clientEmail} onchange={handleClientEmailChange}></lightning-input>
+                </div>
+            </div>
+            <lightning-button label="Create Client" onclick={handleCreateClient} class="slds-m-top_small"></lightning-button>
+            
             <template if:true={clients}>
                 <lightning-datatable
-                    key-field="id"
+                    key-field="Id"
                     data={clients}
                     columns={columns}
                     onrowaction={handleRowAction}
                     hide-checkbox-column="true">
                 </lightning-datatable>
-            </template>
-            <template if:true={isLoading}>
-                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
             </template>
             <template if:true={error}>
                 <div class="slds-text-color_error">{error}</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Projects Home</masterLabel>
+    <description>Custom Projects Home Page</description>
+    <template>
+        <templateName>home:desktopTemplate</templateName>
+    </template>
+    <views>
+        <viewName>default</viewName>
+    </views>
+    <sections>
+        <section>
+            <layoutItems>
+                <componentInstance>
+                    <componentName>projectsManager</componentName>
+                    <identifier>projectsManager</identifier>
+                </componentInstance>
+            </layoutItems>
+        </section>
+    </sections>
+</flexiPage>

@@ -5,4 +5,6 @@
     <flexiPage>TPM</flexiPage>
     <masterLabel>Digital Marketing App</masterLabel>
     <type>App</type>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
 </LightningApp>

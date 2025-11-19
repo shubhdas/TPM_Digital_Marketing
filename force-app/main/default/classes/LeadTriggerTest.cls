@@ -1,11 +1,22 @@
 @isTest
 public class LeadTriggerTest {
+    
     @isTest
-    static void testLeadNotification() {
+    static void testLeadTrigger() {
+        // Create a new Lead record
+        Lead testLead = new Lead(
+            FirstName = 'John',
+            LastName = 'Doe',
+            Company = 'Test Company',
+            Email = 'john.doe@test.com'
+        );
+        
+        // Insert the lead
         Test.startTest();
-        Lead l = new Lead(FirstName='Test', LastName='Lead', Company='Test Company');
-        insert l;
+        insert testLead;
         Test.stopTest();
-        // Email sending can't be asserted directly, but no errors should occur
+        
+        // Add assertions to verify trigger behavior
+        // For example, check if email was sent or other trigger logic
     }
 }

@@ -1,27 +1,20 @@
 @echo off
-REM Script to create a new scratch org
-
 echo Creating new scratch org...
-
-REM Check if Salesforce CLI is installed
-where sfdx >nul 2>&1
-if %ERRORLEVEL% NEQ 0 (
-    echo Salesforce CLI is not installed. Please install it first.
-    pause
+sf org create scratch --definition-file config/dev-scratch-def.json --alias digital-marketing-dev --set-default-org
+if %ERRORLEVEL% EQU 0 (
+    echo Scratch org created successfully!
+    echo Deploying metadata...
+    sf deploy metadata --source-dir force-app/main/default --target-org digital-marketing-dev
+    if %ERRORLEVEL% EQU 0 (
+        echo Metadata deployed successfully!
+        echo Opening scratch org...
+        sf org open --target-org digital-marketing-dev
+    ) else (
+        echo Failed to deploy metadata!
+        exit /b 1
+    )
+) else (
+    echo Failed to create scratch org!
     exit /b 1
 )
-
-REM Create scratch org
-echo Creating scratch org from dev definition...
-sfdx force:org:create -f config/dev-scratch-def.json -a dev-org -d 30
-
-REM Assign permission set
-echo Assigning permission set...
-sfdx force:user:permset:assign -n DigitalMarketingDeveloper
-
-REM Open org
-echo Opening org...
-sfdx force:org:open -u dev-org
-
-echo Scratch org created successfully!
 pause

@@ -3,12 +3,23 @@ import getClients from '@salesforce/apex/DigitalMarketingController.getClients';
 import createClient from '@salesforce/apex/DigitalMarketingController.createClient';
 import updateClient from '@salesforce/apex/DigitalMarketingController.updateClient';
 import deleteClient from '@salesforce/apex/DigitalMarketingController.deleteClient';
+import { refreshApex } from '@salesforce/apex';
 
 export default class ClientsManager extends LightningElement {
     @track clients = [];
     @track error;
     @track clientName = '';
+    @track clientEmail = '';
     @track clientId;
+    
+    columns = [
+        { label: 'Name', fieldName: 'Name', type: 'text' },
+        { label: 'Email', fieldName: 'Client_Email__c', type: 'email' },
+        { type: 'action', typeAttributes: { rowActions: [
+            { label: 'Edit', name: 'edit' },
+            { label: 'Delete', name: 'delete' }
+        ]}}
+    ];
 
     @wire(getClients)
     wiredClients({ error, data }) {
@@ -25,10 +36,15 @@ export default class ClientsManager extends LightningElement {
         this.clientName = event.target.value;
     }
 
+    handleClientEmailChange(event) {
+        this.clientEmail = event.target.value;
+    }
+
     handleCreateClient() {
-        createClient({ name: this.clientName })
+        createClient({ name: this.clientName, email: this.clientEmail })
             .then(() => {
                 this.clientName = '';
+                this.clientEmail = '';
                 return refreshApex(this.clients);
             })
             .catch(error => {
@@ -37,9 +53,10 @@ export default class ClientsManager extends LightningElement {
     }
 
     handleUpdateClient() {
-        updateClient({ id: this.clientId, name: this.clientName })
+        updateClient({ clientId: this.clientId, name: this.clientName, email: this.clientEmail })
             .then(() => {
                 this.clientName = '';
+                this.clientEmail = '';
                 this.clientId = null;
                 return refreshApex(this.clients);
             })
@@ -49,7 +66,7 @@ export default class ClientsManager extends LightningElement {
     }
 
     handleDeleteClient(clientId) {
-        deleteClient({ id: clientId })
+        deleteClient({ clientId: clientId })
             .then(() => {
                 return refreshApex(this.clients);
             })
@@ -60,6 +77,28 @@ export default class ClientsManager extends LightningElement {
 
     handleEditClient(client) {
         this.clientName = client.Name;
+        this.clientEmail = client.Client_Email__c;
         this.clientId = client.Id;
+    }
+    
+    handleRowAction(event) {
+        const action = event.detail.action;
+        const client = event.detail.row;
+        switch (action.name) {
+            case 'edit':
+                this.handleEditClient(client);
+                break;
+            case 'delete':
+                this.handleDeleteClient(client.Id);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    handleNewClient() {
+        this.clientName = '';
+        this.clientEmail = '';
+        this.clientId = null;
     }
 }

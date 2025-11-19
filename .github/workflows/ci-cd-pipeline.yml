@@ -31,21 +31,100 @@ jobs:
       env:
         SFDX_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
         
-    - name: Deploy to Scratch Org
+    - name: Create Scratch Org
       run: |
         sfdx force:org:create -f config/dev-scratch-def.json -a test-org -d 1
-        sfdx force:source:deploy -p force-app -u test-org
+        if [ $? -ne 0 ]; then
+          echo "Failed to create scratch org"
+          exit 1
+        fi
         
-    - name: Run Tests
+    - name: Deploy Source Code
       run: |
-        sfdx force:apex:test:run -u test-org --wait 5
+        sfdx force:source:deploy -p force-app -u test-org
+        if [ $? -ne 0 ]; then
+          echo "Failed to deploy source code"
+          exit 1
+        fi
         
+    - name: Run All Tests
+      run: |
+        sfdx force:apex:test:run -u test-org --wait 5 --resultformat human
+        if [ $? -ne 0 ]; then
+          echo "Tests failed"
+          exit 1
+        fi
+        
+    - name: Run LWC Tests
+      run: |
+        sfdx force:lightning:test:run -u test-org --wait 5 --resultformat human
+        if [ $? -ne 0 ]; then
+          echo "LWC tests failed"
+          exit 1
+        fi
+        
+    - name: Validate Deployment
+      run: |
+        sfdx force:source:retrieve -p force-app -u test-org
+        if [ $? -ne 0 ]; then
+          echo "Deployment validation failed"
+          exit 1
+        fi
+        
+    - name: Store Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: deployment-artifacts
+        path: |
+          force-app/
+          config/
+          
     - name: Deploy to Dev
       if: github.ref == 'refs/heads/develop'
       run: |
+        # Authenticate to Dev org
+        echo ${{ secrets.DEV_ORG_AUTH_URL }} | base64 -d > dev_auth.json
+        sfdx force:auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile dev_auth.json --username ${{ secrets.DEV_ORG_USERNAME }} --setalias dev-org
+        if [ $? -ne 0 ]; then
+          echo "Failed to authenticate to Dev org"
+          exit 1
+        fi
+        
+        # Deploy to Dev org
         sfdx force:source:deploy -p force-app -u dev-org
+        if [ $? -ne 0 ]; then
+          echo "Failed to deploy to Dev org"
+          exit 1
+        fi
+        
+        # Run validation tests in Dev
+        sfdx force:apex:test:run -u dev-org --wait 5 --resultformat human
+        if [ $? -ne 0 ]; then
+          echo "Validation tests failed in Dev"
+          exit 1
+        fi
         
     - name: Deploy to Prod
       if: github.ref == 'refs/heads/main'
       run: |
+        # Authenticate to Prod org
+        echo ${{ secrets.PROD_ORG_AUTH_URL }} | base64 -d > prod_auth.json
+        sfdx force:auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile prod_auth.json --username ${{ secrets.PROD_ORG_USERNAME }} --setalias prod-org
+        if [ $? -ne 0 ]; then
+          echo "Failed to authenticate to Prod org"
+          exit 1
+        fi
+        
+        # Deploy to Prod org
         sfdx force:source:deploy -p force-app -u prod-org
+        if [ $? -ne 0 ]; then
+          echo "Failed to deploy to Prod org"
+          exit 1
+        fi
+        
+        # Run validation tests in Prod
+        sfdx force:apex:test:run -u prod-org --wait 5 --resultformat human
+        if [ $? -ne 0 ]; then
+          echo "Validation tests failed in Prod"
+          exit 1
+        fi

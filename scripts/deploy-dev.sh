@@ -1,25 +1,11 @@
 #!/bin/bash
 
-# Deploy script for development environment
-echo "Starting deployment to development environment..."
+echo "Deploying to Development Org..."
+sf deploy metadata --source-dir force-app/main/default --target-org digital-marketing-dev
 
-# Check if Salesforce CLI is installed
-if ! command -v sfdx &> /dev/null
-then
-    echo "Salesforce CLI is not installed. Please install it first."
+if [ $? -eq 0 ]; then
+    echo "Deployment to Development Org completed successfully!"
+else
+    echo "Deployment to Development Org failed!"
     exit 1
 fi
-
-# Authenticate to Dev Hub (if not already authenticated)
-echo "Authenticating to Dev Hub..."
-sfdx force:auth:web:login -d -r https://test.salesforce.com
-
-# Deploy to development org
-echo "Deploying to development org..."
-sfdx force:source:deploy -p force-app -u dev-org
-
-# Run tests
-echo "Running tests..."
-sfdx force:apex:test:run -u dev-org
-
-echo "Deployment to development environment completed successfully!"

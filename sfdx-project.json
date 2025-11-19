@@ -1,15 +1,12 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
-    }
-  ],
-  "namespace": "",
-  "sourceApiVersion": "57.0",
-  "plugins": {
-    "sfdx-cli": {
-      "version": "7.186.0"
-    }
-  }
+    "name": "Salesforce Digital Marketing CRM",
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "57.0",
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true
+        }
+    ]
 }

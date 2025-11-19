@@ -1,116 +1,118 @@
 # Salesforce Digital Marketing CRM
 
-A comprehensive digital marketing management system built on Salesforce with modern CI/CD practices.
+A comprehensive Salesforce CRM solution for managing digital marketing operations including Leads, Clients, Campaigns, Projects, and Billing.
 
-## Project Structure
+## Project Overview
 
-This project follows a standard Salesforce DX structure with the following key components:
+This project implements a complete digital marketing management system built on Salesforce with:
+- Custom objects for Leads, Clients, Campaigns, Projects, and Billing
+- Apex controllers with full CRUD operations
+- Lightning Web Components for the user interface
+- Automated deployment and CI/CD pipeline
+- GitFlow branching strategy implementation
+- Enhanced Lightning Experience with personalization features
+
+## Features
+
+### Core Functionality
+- Lead management with status tracking
+- Client relationship management
+- Campaign planning and tracking
+- Project management with timeline controls
+- Billing and invoicing system
+
+### Technical Features
+- Full CRUD operations for all entities
+- Proper error handling and validation
+- Security checks and user permissions
+- Responsive Lightning Web Components
+- Automated testing framework
+- Multi-environment deployment scripts
+- GitHub Actions CI/CD pipeline
+- Lightning Experience personalization capabilities
+
+## Repository Structure
 
 ```
 .
-├── force-app/                 # Main source directory
-│   ├── main/                  # Default package
-│   │   └── default/
-│   │       ├── classes/       # Apex classes
-│   │       ├── objects/       # Custom objects
-│   │       ├── triggers/      # Triggers
-│   │       ├── lwc/           # Lightning Web Components
-│   │       └── pages/         # Visualforce pages
-├── config/                    # Configuration files
-├── scripts/                   # Deployment scripts
-├── .github/workflows/         # GitHub Actions workflows
-└── README.md                  # This file
+├── force-app/                    # Salesforce source code
+│   └── main/
+│       └── default/
+│           ├── apps/              # Application definitions
+│           ├── classes/           # Apex classes
+│           ├── lwc/               # Lightning Web Components
+│           ├── objects/           # Custom objects
+│           ├── pages/             # Visualforce pages
+│           ├── permissionsets/    # Permission sets
+│           ├── flexipages/        # Lightning App Pages (enhanced)
+│           ├── lightningapps/     # Lightning Apps (enhanced)
+│           └── triggers/          # Apex triggers
+├── config/                       # Environment configurations
+├── scripts/                      # Deployment scripts
+├── .github/workflows/            # CI/CD pipeline
+└── README.md                     # This file
 ```
 
-## Branching Strategy
+## Setup Instructions
 
-This project implements a GitFlow-inspired branching strategy for smooth CI/CD:
+### Prerequisites
+- Salesforce CLI installed
+- Salesforce DX Developer Hub
+- Git installed
 
-### Main Branches
-- **main**: Production-ready code
-- **develop**: Integration branch for features
-- **feature/**: Feature branches for new development
-- **release/**: Release preparation branches
-- **hotfix/**: Emergency fixes for production
+### Installation Steps
+1. Clone this repository to your local machine
+2. Authorize your Dev Hub org:
+   ```bash
+   sf org login web --set-default-dev-hub --alias dev-hub
+   ```
+3. Create a scratch org:
+   ```bash
+   sf org create scratch --definition-file config/dev-scratch-def.json --alias digital-marketing-dev
+   ```
+4. Deploy the source code:
+   ```bash
+   sf deploy metadata --source-dir force-app/main/default
+   ```
 
-### Branch Naming Convention
-- `feature/feature-name` - For new features
-- `release/vX.X.X` - For release preparation
-- `hotfix/issue-number` - For urgent fixes
-- `bugfix/issue-number` - For bug fixes
+## Deployment Scripts
+
+Cross-platform deployment scripts are provided:
+- `scripts/deploy-dev.bat` - Deploy to development org (Windows)
+- `scripts/deploy-dev.sh` - Deploy to development org (Linux/Mac)
+- `scripts/deploy-staging.bat` - Deploy to staging org (Windows)
+- `scripts/deploy-staging.sh` - Deploy to staging org (Linux/Mac)
+- `scripts/deploy-prod.bat` - Deploy to production org (Windows)
+- `scripts/deploy-prod.sh` - Deploy to production org (Linux/Mac)
+- `scripts/create-scratch.bat` - Create a new scratch org (Windows)
+- `scripts/create-scratch.sh` - Create a new scratch org (Linux/Mac)
+- `scripts/deploy-lightning-experience.bat` - Deploy with Lightning Experience enhancements (Windows)
+- `scripts/deploy-lightning-experience.sh` - Deploy with Lightning Experience enhancements (Linux/Mac)
+
+> Note: On Linux/Mac systems, you may need to make the shell script executable with `chmod +x scripts/deploy-lightning-experience.sh` before running it.
 
 ## CI/CD Pipeline
 
-### Deployment Scripts
+The project includes a GitHub Actions workflow that automates testing and deployment:
+- `.github/workflows/ci-cd-pipeline.yml`
 
-The project includes deployment scripts in the `scripts/` directory:
+## Branching Strategy
 
-1. **scripts/deploy-dev.sh** - Deploy to development org
-2. **scripts/deploy-staging.sh** - Deploy to staging org  
-3. **scripts/deploy-prod.sh** - Deploy to production org
-4. **scripts/create-scratch.sh** - Create a new scratch org
+This project follows GitFlow branching strategy:
+- `main` - Production-ready code
+- `develop` - Integration branch
+- `feature/*` - Feature branches
+- `release/*` - Release preparation branches
+- `hotfix/*` - Emergency fixes
 
-### Environment Configuration
+## Lightning Experience Enhancements
 
-Configuration files are stored in the `config/` directory:
-- `config/dev-scratch-def.json` - Scratch org definition for development
-- `config/staging-scratch-def.json` - Scratch org definition for staging
-- `config/prod-scratch-def.json` - Scratch org definition for production
-
-## Deployment Process
-
-### 1. Development Workflow
-1. Create feature branch from `develop`: `git checkout -b feature/new-feature develop`
-2. Implement changes
-3. Commit and push to feature branch
-4. Create Pull Request to `develop`
-5. Code review and merge
-
-### 2. Release Workflow
-1. Create release branch from `develop`: `git checkout -b release/v1.2.0 develop`
-2. Final testing and bug fixes
-3. Merge to `main` and `develop`
-4. Tag the release: `git tag v1.2.0`
-5. Push tags: `git push origin v1.2.0`
-
-### 3. Hotfix Workflow
-1. Create hotfix branch from `main`: `git checkout -b hotfix/urgent-fix main`
-2. Fix the issue
-3. Test the fix
-4. Merge to `main` and `develop`
-5. Tag the release: `git tag v1.2.1`
-6. Push tags: `git push origin v1.2.1`
-
-## Prerequisites
-
-- Salesforce CLI installed
-- Node.js 14.x or higher
-- Git installed
-
-## Getting Started
-
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Authorize your org: `sfdx force:auth:web:login -d -r https://test.salesforce.com`
-4. Deploy to org: `sfdx force:source:deploy -p force-app`
-
-## Automated Testing
-
-This project includes automated testing:
-- Apex unit tests
-- LWC component tests
-- Validation scripts
-
-Run tests with: `sfdx force:apex:test:run`
-
-## Contributing
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -am 'Add your feature'`
-4. Push to branch: `git push origin feature/your-feature`
-5. Create pull request
+This application now supports enhanced Lightning Experience features including:
+- Customizable dashboard with personalization options
+- Flexible Lightning App Page structure
+- User preference persistence
+- Improved UI/UX with responsive design
 
 ## License
 
-MIT License
+This project is licensed under the MIT License.
