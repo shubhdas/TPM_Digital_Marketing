@@ -45,9 +45,9 @@ export default class AdminDashboard extends NavigationMixin(LightningElement) {
     }
 
     loadUserPreferences() {
-        // Try to load user preferences from localStorage
+        // Try to load user preferences from sessionStorage
         try {
-            const prefs = localStorage.getItem('adminDashboardPrefs');
+            const prefs = sessionStorage.getItem('adminDashboardPrefs');
             if (prefs) {
                 const parsedPrefs = JSON.parse(prefs);
                 this.personalizedView = parsedPrefs.personalizedView !== false; // Default to true
@@ -62,14 +62,14 @@ export default class AdminDashboard extends NavigationMixin(LightningElement) {
     }
 
     saveUserPreferences() {
-        // Save user preferences to localStorage
+        // Save user preferences to sessionStorage
         try {
             const prefs = {
                 personalizedView: this.personalizedView,
                 showQuickActions: this.showQuickActions,
                 selectedWidgets: this.selectedWidgets
             };
-            localStorage.setItem('adminDashboardPrefs', JSON.stringify(prefs));
+            sessionStorage.setItem('adminDashboardPrefs', JSON.stringify(prefs));
         } catch (error) {
             console.error('Error saving user preferences:', error);
         }

@@ -3,7 +3,7 @@ import AdminDashboard from 'c/adminDashboard';
 
 describe('c-admin-dashboard', () => {
     afterEach(() => {
-        // The jsdom instance is shared across test cases
+        // Clean up DOM after each test
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }

@@ -1,8 +1,8 @@
 <template>
-    <lightning-card title="Admin Dashboard" icon-name="utility:dashboard">
+    <lightning-card title="Admin Dashboard">
         <!-- Personalization Controls -->
         <div slot="actions">
-            <lightning-button-menu menu-align="right" icon-name="utility:settings" alternative-text="Settings">
+            <lightning-button-menu menu-align="right" alternative-text="Settings">
                 <lightning-menu-item label="Personalized View" onclick={handleTogglePersonalizedView} checked={personalizedView}></lightning-menu-item>
                 <lightning-menu-item label="Show Quick Actions" onclick={handleToggleQuickActions} checked={showQuickActions}></lightning-menu-item>
             </lightning-button-menu>
@@ -18,7 +18,7 @@
             <div class="slds-p-around_medium">
                 <!-- Widget Selection Panel (only visible in personalized view) -->
                 <template if:true={personalizedView}>
-                    <lightning-card title="Customize Widgets" icon-name="utility:settings">
+                    <lightning-card title="Customize Widgets">
                         <div class="slds-grid slds-wrap slds-gutters slds-p-around_medium">
                             <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-5">
                                 <lightning-input type="checkbox" label="Leads" value="leads" checked={showLeadsWidget} onchange={handleWidgetSelection}></lightning-input>
@@ -43,7 +43,7 @@
                 <div class="slds-grid slds-wrap slds-gutters">
                     <template if:true={showLeadsWidget}>
                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-5">
-                            <lightning-card class="kpi-card" title="Leads" icon-name="standard:lead">
+                            <lightning-card class="kpi-card" title="Leads">
                                 <div class="slds-p-around_medium kpi-value">{leadsCount}</div>
                             </lightning-card>
                         </div>
@@ -51,7 +51,7 @@
                     
                     <template if:true={showClientsWidget}>
                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-5">
-                            <lightning-card class="kpi-card" title="Clients" icon-name="standard:account">
+                            <lightning-card class="kpi-card" title="Clients">
                                 <div class="slds-p-around_medium kpi-value">{clientsCount}</div>
                             </lightning-card>
                         </div>
@@ -59,7 +59,7 @@
                     
                     <template if:true={showCampaignsWidget}>
                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-5">
-                            <lightning-card class="kpi-card" title="Campaigns" icon-name="custom:custom63">
+                            <lightning-card class="kpi-card" title="Campaigns">
                                 <div class="slds-p-around_medium kpi-value">{campaignsCount}</div>
                             </lightning-card>
                         </div>
@@ -67,7 +67,7 @@
                     
                     <template if:true={showProjectsWidget}>
                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-5">
-                            <lightning-card class="kpi-card" title="Projects" icon-name="standard:work_order">
+                            <lightning-card class="kpi-card" title="Projects">
                                 <div class="slds-p-around_medium kpi-value">{projectsCount}</div>
                             </lightning-card>
                         </div>
@@ -75,7 +75,7 @@
                     
                     <template if:true={showBillingWidget}>
                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-5">
-                            <lightning-card class="kpi-card" title="Billing" icon-name="standard:orders">
+                            <lightning-card class="kpi-card" title="Billing">
                                 <div class="slds-p-around_medium kpi-value">{billingCount}</div>
                             </lightning-card>
                         </div>
@@ -87,25 +87,25 @@
                     <div class="slds-m-top_large">
                         <lightning-layout multiple-rows>
                             <lightning-layout-item size="12">
-                                <lightning-card title="Quick Actions" icon-name="utility:forward">
+                                <lightning-card title="Quick Actions">
                                     <div class="slds-p-around_medium slds-grid slds-wrap slds-gutters">
                                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                            <lightning-button label="Manage Leads" variant="brand" class="slds-m-bottom_small" onclick={navigateToLeads} icon-name="standard:lead"></lightning-button>
+                                            <lightning-button label="Manage Leads" variant="brand" class="slds-m-bottom_small" onclick={navigateToLeads}></lightning-button>
                                         </div>
                                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                            <lightning-button label="Manage Clients" variant="brand" class="slds-m-bottom_small" onclick={navigateToClients} icon-name="standard:account"></lightning-button>
+                                            <lightning-button label="Manage Clients" variant="brand" class="slds-m-bottom_small" onclick={navigateToClients}></lightning-button>
                                         </div>
                                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                            <lightning-button label="Manage Campaigns" variant="brand" class="slds-m-bottom_small" onclick={navigateToCampaigns} icon-name="custom:custom63"></lightning-button>
+                                            <lightning-button label="Manage Campaigns" variant="brand" class="slds-m-bottom_small" onclick={navigateToCampaigns}></lightning-button>
                                         </div>
                                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                            <lightning-button label="Manage Projects" variant="neutral" class="slds-m-bottom_small" onclick={navigateToProjects} icon-name="standard:work_order"></lightning-button>
+                                            <lightning-button label="Manage Projects" variant="neutral" class="slds-m-bottom_small" onclick={navigateToProjects}></lightning-button>
                                         </div>
                                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                            <lightning-button label="Manage Billing" variant="neutral" class="slds-m-bottom_small" onclick={navigateToBilling} icon-name="standard:orders"></lightning-button>
+                                            <lightning-button label="Manage Billing" variant="neutral" class="slds-m-bottom_small" onclick={navigateToBilling}></lightning-button>
                                         </div>
                                         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
-                                            <lightning-button label="Google Ads Integration" variant="destructive-text" class="slds-m-bottom_small" onclick={navigateToGoogleAds} icon-name="utility:link"></lightning-button>
+                                            <lightning-button label="Google Ads Integration" variant="destructive-text" class="slds-m-bottom_small" onclick={navigateToGoogleAds}></lightning-button>
                                         </div>
                                     </div>
                                 </lightning-card>
