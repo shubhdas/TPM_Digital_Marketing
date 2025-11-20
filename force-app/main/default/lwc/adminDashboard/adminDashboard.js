@@ -5,7 +5,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { loadStyle } from 'lightning/platformResourceLoader';
 import dashboardStyles from '@salesforce/resourceUrl/DashboardStyles';
 
-export default class AdminDashboard extends LightningElement {
+export default class AdminDashboard extends NavigationMixin(LightningElement) {
     @track dashboardData;
     @track error;
     @track personalizedView = true;
